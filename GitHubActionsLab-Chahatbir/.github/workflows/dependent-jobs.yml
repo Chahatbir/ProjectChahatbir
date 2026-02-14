@@ -1,0 +1,48 @@
+name: Job Dependencies Workflow
+
+# Trigger on push to the main branch
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  # Job 1: Build
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Print build message
+        run: echo "Building application..."
+      
+      - name: Simulate build process
+        run: sleep 5  # Pauses for 5 seconds to simulate work
+
+  # Job 2: Test (Depends on build)
+  test:
+    needs: build  # This line makes it wait for 'build' to finish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Print test message
+        run: echo "Running tests..."
+      
+      - name: Simulate testing
+        run: sleep 5
+
+  # Job 3: Deploy (Depends on test)
+  deploy:
+    needs: test  # This line makes it wait for 'test' to finish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Print deploy message
+        run: echo "Deploying application..."
+      
+      - name: Simulate deployment
+        run: sleep 5
