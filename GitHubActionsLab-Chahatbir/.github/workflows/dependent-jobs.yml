@@ -3,7 +3,7 @@ name: Job Dependencies Workflow
 # Trigger on push to the main branch
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "feature/clone-work" ]
 
 jobs:
   # Job 1: Build
